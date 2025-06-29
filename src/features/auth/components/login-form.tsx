@@ -58,6 +58,25 @@ export default function LoginCard() {
     );
   };
 
+  const onSocial = (provider: "google" | "github") => {
+    setError(null);
+    setPending(true);
+
+    authClient.signIn.social(
+      { provider },
+      {
+        onSuccess: () => {
+          setPending(false);
+          router.push("/");
+        },
+        onError: (error) => {
+          setPending(false);
+          setError(error.error.message);
+        },
+      }
+    );
+  };
+
   return (
     <div className="flex flex-col gap-6">
       <Card className="overflow-hidden p-0">
@@ -134,7 +153,14 @@ export default function LoginCard() {
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
-                    <Button variant="outline" type="button" className="w-full">
+                    <Button
+                      variant="outline"
+                      type="button"
+                      className="w-full cursor-pointer"
+                      onClick={() => {
+                        onSocial("github");
+                      }}
+                    >
                       <Image
                         src="/github.svg"
                         alt="Github"
@@ -143,7 +169,14 @@ export default function LoginCard() {
                       />
                       Github
                     </Button>
-                    <Button variant="outline" type="button" className="w-full">
+                    <Button
+                      variant="outline"
+                      type="button"
+                      className="w-full cursor-pointer"
+                      onClick={() => {
+                        onSocial("google");
+                      }}
+                    >
                       <Image
                         src="/google.svg"
                         alt="Google"
