@@ -65,11 +65,10 @@ export default function SignupCard() {
     setPending(true);
 
     authClient.signIn.social(
-      { provider },
+      { provider, callbackURL: "/" },
       {
         onSuccess: () => {
           setPending(false);
-          router.push("/");
         },
         onError: (error) => {
           setPending(false);
