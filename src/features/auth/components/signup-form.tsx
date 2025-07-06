@@ -22,6 +22,7 @@ import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { signupInputSchema } from "../api/signup";
+import Spinner from "@/components/ui/spinner";
 
 export default function SignupCard() {
   const router = useRouter();
@@ -178,9 +179,15 @@ export default function SignupCard() {
                       </AlertTitle>
                     </Alert>
                   )}
-
                   <Button className="w-full" type="submit" disabled={pending}>
-                    Sign Up
+                    {!pending ? (
+                      "Sign Up"
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <Spinner size={16} color="white" />
+                        Signing Up
+                      </div>
+                    )}
                   </Button>
 
                   <div className="relative text-sm text-center">
