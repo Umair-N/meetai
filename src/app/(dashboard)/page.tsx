@@ -1,4 +1,4 @@
-import HomePage from "@/features/home/components/home-page";
+import HomePage from "@/features/dashboard";
 import { authClient } from "@/lib/auth-client";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";

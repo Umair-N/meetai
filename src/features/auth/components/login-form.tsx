@@ -22,6 +22,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import Spinner from "@/components/ui/spinner";
 
 export default function LoginCard() {
   const router = useRouter();
@@ -140,8 +141,19 @@ export default function LoginCard() {
                     </Alert>
                   )}
 
-                  <Button className="w-full" type="submit" disabled={pending}>
-                    Sign In
+                  <Button
+                    className="w-full cursor-pointer"
+                    type="submit"
+                    disabled={pending}
+                  >
+                    {!pending ? (
+                      "Sign In"
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <Spinner size={16} color="white" />
+                        Signing In
+                      </div>
+                    )}
                   </Button>
 
                   <div className="relative text-sm text-center">
@@ -202,7 +214,7 @@ export default function LoginCard() {
 
           <div className="bg-radial from-blue-700 to-blue-900 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
             <Image src="/logo.svg" alt="Login" width={92} height={92} />
-            <p className="text-white font-bold text-2xl">Meet.AI</p>
+            <p className="text-white font-bold text-2xl">Convoo.ai</p>
           </div>
         </CardContent>
       </Card>
